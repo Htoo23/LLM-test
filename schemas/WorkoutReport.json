@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WorkoutReport",
+  "type": "object",
+  "required": ["athlete", "session", "actual", "fueling"],
+  "properties": {
+    "athlete": {
+      "type": "object",
+      "required": ["age", "sex", "mass_kg"],
+      "properties": {
+        "age": {
+          "type": "number",
+          "description": "Age of the athlete in years."
+        },
+        "sex": {
+          "type": "string",
+          "enum": ["M", "F", "Other"],
+          "description": "Sex of the athlete."
+        },
+        "mass_kg": {
+          "type": "number",
+          "description": "Body mass of the athlete in kilograms."
+        }
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": ["date", "type", "planned_min"],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the session."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of workout (e.g. Long, Tempo, Easy, Strength)."
+        },
+        "planned_min": {
+          "type": "number",
+          "description": "Planned duration in minutes."
+        }
+      }
+    },
+    "actual": {
+      "type": "object",
+      "required": ["distance_km", "duration_min", "avg_hr", "rpe", "elev_gain_m", "temp_c", "humidity_pct"],
+      "properties": {
+        "distance_km": {
+          "type": "number",
+          "description": "Distance completed during the session in kilometres."
+        },
+        "duration_min": {
+          "type": "number",
+          "description": "Actual duration of the session in minutes."
+        },
+        "avg_hr": {
+          "type": "number",
+          "description": "Average heart rate during the session."
+        },
+        "rpe": {
+          "type": "number",
+          "description": "Rating of perceived exertion on a numeric scale (e.g. 1-10)."
+        },
+        "elev_gain_m": {
+          "type": "number",
+          "description": "Elevation gain in metres."
+        },
+        "temp_c": {
+          "type": "number",
+          "description": "Ambient temperature in degrees Celsius during the session."
+        },
+        "humidity_pct": {
+          "type": "number",
+          "description": "Relative humidity percentage during the session."
+        }
+      }
+    },
+    "fueling": {
+      "type": "object",
+      "required": ["carbs_g", "sodium_mg", "fluids_ml"],
+      "properties": {
+        "carbs_g": {
+          "type": "number",
+          "description": "Total carbohydrates consumed during the session in grams."
+        },
+        "sodium_mg": {
+          "type": "number",
+          "description": "Total sodium intake during the session in milligrams."
+        },
+        "fluids_ml": {
+          "type": "number",
+          "description": "Total fluid intake during the session in millilitres."
+        }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Optional list of issues or notes encountered during the workout."
+    }
+  },
+  "description": "Schema for reporting the results of a completed workout session."
+}

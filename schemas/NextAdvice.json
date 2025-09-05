@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NextAdvice",
+  "type": "object",
+  "required": ["defer", "risk_flags", "changes", "hydration_plan", "pace_caps", "notes"],
+  "properties": {
+    "defer": {
+      "type": "boolean",
+      "description": "Set true if the model cannot provide reliable advice and defers to a human coach."
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of risk factors identified for the athlete (e.g. heat_stress, cramp_history)."
+    },
+    "changes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["reason"],
+        "properties": {
+          "session": {
+            "type": "string",
+            "description": "Identifier or description of the session being modified."
+          },
+          "from": {
+            "type": "string",
+            "description": "Original description of the session."
+          },
+          "to": {
+            "type": "string",
+            "description": "New description of the session after adjustment."
+          },
+          "add": {
+            "type": "string",
+            "description": "Additional instructions such as fueling adjustments."
+          },
+          "reason": {
+            "type": "string",
+            "description": "Explanation of why the change or addition is recommended."
+          }
+        }
+      },
+      "description": "List of proposed changes to upcoming sessions."
+    },
+    "hydration_plan": {
+      "type": "object",
+      "required": ["na_mg_per_hr", "fluids_ml_per_hr"],
+      "properties": {
+        "na_mg_per_hr": {
+          "type": "number",
+          "description": "Sodium intake per hour in milligrams."
+        },
+        "fluids_ml_per_hr": {
+          "type": "number",
+          "description": "Fluid intake per hour in millilitres."
+        }
+      },
+      "description": "Recommended hydration strategy based on risk assessment."
+    },
+    "pace_caps": {
+      "type": "object",
+      "required": ["easy_max_min_per_km", "long_start_min_per_km"],
+      "properties": {
+        "easy_max_min_per_km": {
+          "type": "number",
+          "description": "Maximum pace (min/km) allowed for easy runs."
+        },
+        "long_start_min_per_km": {
+          "type": "number",
+          "description": "Starting pace (min/km) for long runs."
+        }
+      },
+      "description": "Recommended pacing caps for upcoming workouts."
+    },
+    "notes": {
+      "type": "string",
+      "description": "General notes or high‑level advice for the athlete."
+    }
+  },
+  "description": "Schema defining how the model should respond with recommendations after a workout."
+}

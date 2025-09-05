@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TrainingPlan",
+  "type": "object",
+  "required": ["race_date", "weeks", "notes"],
+  "properties": {
+    "race_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the target race in YYYY-MM-DD format."
+    },
+    "weeks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["wk", "focus", "sessions"],
+        "properties": {
+          "wk": {
+            "type": "integer",
+            "description": "Week number relative to the training cycle start."
+          },
+          "focus": {
+            "type": "string",
+            "description": "Primary focus or theme for the week (e.g. base building, peak, taper)."
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["day", "type", "duration_min"],
+              "properties": {
+                "day": {
+                  "type": "string",
+                  "enum": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                  "description": "Day of the week for the session."
+                },
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "Easy",
+                    "Long",
+                    "Tempo",
+                    "Intervals",
+                    "Recovery",
+                    "Rest",
+                    "Strength"
+                  ],
+                  "description": "Type of workout."
+                },
+                "target": {
+                  "type": "object",
+                  "properties": {
+                    "pace_min_per_km": {
+                      "type": "number",
+                      "description": "Target pace in minutes per kilometre."
+                    },
+                    "hr_zone": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 5,
+                      "description": "Target heart rate zone (1-5)."
+                    }
+                  }
+                },
+                "duration_min": {
+                  "type": "integer",
+                  "description": "Planned duration of the session in minutes."
+                },
+                "notes": {
+                  "type": "string",
+                  "description": "Additional notes or instructions for the session."
+                }
+              }
+            },
+            "description": "List of workout sessions planned for the week."
+          }
+        }
+      },
+      "description": "Array of weekly plans."
+    },
+    "notes": {
+      "type": "string",
+      "description": "General notes about the training plan."
+    }
+  },
+  "description": "Schema defining a structured training plan for marathon preparation."
+}
